@@ -28,6 +28,8 @@ namespace WebUI
         {
             services.AddControllersWithViews();
             services.AddDbContext<RRDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("kpop-db")));
+            services.AddScoped<IRepo, DBRepo>();
+            services.AddScoped<IBL, BL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
