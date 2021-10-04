@@ -4,11 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RBBL;
+using Models;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
     public class CustomerController : Controller
     {
+        private IBL _bl;
+        public CustomerController(IBL bl)
+        {
+            _bl = bl;
+        }
         // GET: CustomerController
         public ActionResult Index()
         {
@@ -30,11 +38,16 @@ namespace WebUI.Controllers
         // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Customer customer)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _bl.AddCustomer(customer);
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
             catch
             {
