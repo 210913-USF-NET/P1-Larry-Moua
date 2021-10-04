@@ -3,132 +3,107 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Model = Models;
-using Entity = DL.Entities;
+// using Entity = DL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace DL
 {
     public class DBRepo : IRepo
     {
-        private Entity.kpopsnapshotdbContext _context;
+        private RRDBContext _context;
 
-        public DBRepo(Entity.kpopsnapshotdbContext context)
+        public DBRepo(RRDBContext context)
         {
             _context = context;
         }
 
-        public Model.Customer AddCustomer(Model.Customer custom)
+        public Customer AddCustomer(Customer custom)
         {
-            Entity.Customer customToAdd = new Entity.Customer(){
-                Name = custom.Name,
-                Email = custom.Email,
-                Address = custom.Address,
-                Points = 0
-            };
 
-            customToAdd = _context.Add(customToAdd).Entity;
+            custom = _context.Add(custom).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Model.Customer()
-            {
-                Id = customToAdd.Id,
-                Name = customToAdd.Name,
-                Email = customToAdd.Email,
-                Address = customToAdd.Address,
-                Points = customToAdd.Points
-            };
+            return custom;
 
         }
 
-        public Model.Customer UpdateCustomer(Model.Customer customerToUpdate, string input)
+        public Customer UpdateCustomer(Customer customerToUpdate, string input)
         {
-            Entity.Customer customToUpdate = (from c in _context.Customers
-                where c.Email == customerToUpdate.Email
-                select c)
-                .SingleOrDefault();
 
-            customToUpdate.Name = input;
+            customerToUpdate.Name = input;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Model.Customer() {
+            return new Customer() {
                 Name = customerToUpdate.Name
             };
         }
 
-        public Model.Order AddOrder(Model.Order ord, int input1, int input2, int input3)
+        public Order AddOrder(Order ord, int input1, int input2, int input3)
         {
-            Entity.Order orderToAdd = new Entity.Order(){
-                CustomerId = input1,
-                WarehouseId = input2,
-                PhotocardId = input3
-            };
 
-            orderToAdd = _context.Add(orderToAdd).Entity;
+            ord = _context.Add(ord).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Model.Order()
+            return new Order()
             {
-                Id = orderToAdd.Id,
-                CustomerId = orderToAdd.CustomerId,
-                WarehouseId = orderToAdd.WarehouseId,
-                PhotocardId = orderToAdd.PhotocardId,
-                DateandTime = orderToAdd.DateandTime
+                Id = ord.Id,
+                CustomerId = ord.CustomerId,
+                WarehouseId = ord.WarehouseId,
+                PhotocardId = ord.PhotocardId,
+                DateandTime = ord.DateandTime
             };
         }
 
-        public List<Model.Order> GetAllOrders()
+        public List<Order> GetAllOrders()
         {
-            return _context.Orders.Select(
-                orders => new Model.Order()
+            return _context.Order.Select(
+                order => new Order()
                 {
-                    Id = orders.Id,
-                    CustomerId = orders.CustomerId,
-                    WarehouseId = orders.WarehouseId,
-                    PhotocardId = orders.PhotocardId,
-                    DateandTime = orders.DateandTime
+                    Id = order.Id,
+                    CustomerId = order.CustomerId,
+                    WarehouseId = order.WarehouseId,
+                    PhotocardId = order.PhotocardId,
+                    DateandTime = order.DateandTime
                 }
             ).ToList();
         }
 
-        public List<Model.Customer> GetAllCustomers()
+        public List<Customer> GetAllCustomers()
         {
-            return _context.Customers.Select(
-                customers => new Model.Customer()
+            return _context.Customer.Select(
+                customer => new Customer()
                 {
-                    Id = customers.Id,
-                    Name = customers.Name,
-                    Email = customers.Email,
-                    Address = customers.Address,
-                    Points = customers.Points
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Email = customer.Email,
+                    Address = customer.Address,
+                    Points = customer.Points
                 }
             ).ToList();
         }
 
-        public List<Model.Inventory> GetAllInventory()
+        public List<Inventory> GetAllInventory()
         {
-            return _context.Inventories.Select(
-                inventories => new Model.Inventory()
+            return _context.Inventory.Select(
+                inventory => new Inventory()
                 {
-                    Id = inventories.Id,
-                    WarehouseId = inventories.WarehouseId,
-                    PhotocardId = inventories.PhotocardId,
-                    Stock = inventories.Stock
+                    Id = inventory.Id,
+                    WarehouseId = inventory.WarehouseId,
+                    PhotocardId = inventory.PhotocardId,
+                    Stock = inventory.Stock
                 }
                 ).ToList();
 
         }
 
-        public Model.Inventory UpdateInventory(Model.Inventory inventoryToUpdate, int input, int input2)
+        public Inventory UpdateInventory(Inventory inventoryToUpdate, int input, int input2)
         {
-            Entity.Inventory inventToUpdate = (from i in _context.Inventories
-            where i.WarehouseId == input && i.PhotocardId == input2
-            select i)
-            .SingleOrDefault();
 
-            inventToUpdate.Stock--;
+            inventoryToUpdate.Stock--; // this only subtracts one, need to change where it subtracts the specified amount based on parameter
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
             
@@ -137,34 +112,27 @@ namespace DL
             };
         }
 
-        public Model.Inventory StockInventory(Model.Inventory inventoryToStock, int input)
+        public Inventory StockInventory(Inventory inventoryToStock, int input)
         {
-            Entity.Inventory inventToStock = new Entity.Inventory()
+
+            inventoryToStock.Stock = input;
+            inventoryToStock = _context.Inventory.Update(inventoryToStock).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Inventory()
             {
                 Id = inventoryToStock.Id,
                 WarehouseId = inventoryToStock.WarehouseId,
                 PhotocardId = inventoryToStock.PhotocardId,
                 Stock = inventoryToStock.Stock
             };
-
-            inventToStock.Stock = input;
-            inventToStock = _context.Inventories.Update(inventToStock).Entity;
-            _context.SaveChanges();
-            _context.ChangeTracker.Clear();
-
-            return new Model.Inventory()
-            {
-                Id = inventToStock.Id,
-                WarehouseId = inventToStock.WarehouseId,
-                PhotocardId = inventToStock.PhotocardId,
-                Stock = inventToStock.Stock
-            };
         }
 
-        public List<Model.Photocard> GetAllPhotocard()
+        public List<Photocard> GetAllPhotocard()
         {
-            return _context.Photocards.Select(
-                photocard => new Model.Photocard()
+            return _context.Photocard.Select(
+                photocard => new Photocard()
                 {
                     Id = photocard.Id,
                     SetId = photocard.SetId,
