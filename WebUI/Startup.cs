@@ -27,7 +27,7 @@ namespace WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<RRDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("kpop-snapshot-db")));
+            services.AddDbContext<RRDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("kpop-db")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

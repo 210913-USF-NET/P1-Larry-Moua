@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Model = Models;
-// using Entity = DL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -107,7 +105,7 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
             
-            return new Model.Inventory() {
+            return new Inventory() {
                 Stock = inventoryToUpdate.Stock
             };
         }
