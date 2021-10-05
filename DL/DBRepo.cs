@@ -84,6 +84,21 @@ namespace DL
             ).ToList();
         }
 
+        public Customer GetOneCustomerById(int id)
+        {
+            return _context.Customer
+                    .AsNoTracking()
+                    .Include(c => c.Order)
+                    .FirstOrDefault(c => c.Id == id);
+        }
+
+        public void RemoveCustomer(int id)
+        {
+            _context.Customer.Remove(GetOneCustomerById(id));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+        }
+
         public List<Inventory> GetAllInventory()
         {
             return _context.Inventory.Select(

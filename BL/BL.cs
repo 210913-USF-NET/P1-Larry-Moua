@@ -59,5 +59,10 @@ namespace RBBL
             return _repo.StockInventory(inventoryToStock, input);
         }
 
+        public void RemoveCustomer(int id)
+        {
+            _repo.RemoveCustomer(id);
+        }
+
     }
 }

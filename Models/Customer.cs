@@ -69,6 +69,8 @@ namespace Models
         public string Address { get; set; }
         public int Points { get; set; }
 
+        public List<Order> Order { get; set; }
+
         public override string ToString()
         {
             return $"Id: {this.Id} Name: {this.Name}, Email: {this.Email}, Address: {this.Address}, Points: {this.Points}";

@@ -15,5 +15,6 @@ namespace RBBL
         List<Order> GetAllOrders();
         Order AddOrder(Order ord, int input1, int input2, int input3);
         Inventory StockInventory(Inventory inventoryToStock, int input);
+        void RemoveCustomer(int id);
     }
 }

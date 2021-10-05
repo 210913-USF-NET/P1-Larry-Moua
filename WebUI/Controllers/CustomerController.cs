@@ -20,13 +20,8 @@ namespace WebUI.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: CustomerController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            List<Customer> allCustomer = _bl.GetAllCustomers();
+            return View(allCustomer);
         }
 
         // GET: CustomerController/Create
