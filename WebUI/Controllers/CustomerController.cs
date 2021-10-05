@@ -53,37 +53,39 @@ namespace WebUI.Controllers
         // GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_bl.GetOneCustomerById(id));
         }
 
         // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
+                _bl.UpdateCustomer(customer);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Edit));
             }
         }
 
         // GET: CustomerController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_bl.GetOneCustomerById(id));
         }
 
         // POST: CustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Customer customer)
         {
             try
             {
+                _bl.RemoveCustomer(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

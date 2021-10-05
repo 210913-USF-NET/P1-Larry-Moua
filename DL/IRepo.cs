@@ -7,7 +7,7 @@ namespace DL
     {
         List<Customer> GetAllCustomers();
         Customer AddCustomer(Customer custom);
-        Customer UpdateCustomer(Customer customToUpdate, string input);
+        Customer UpdateCustomer(Customer customToUpdate);
         List<Inventory> GetAllInventory();
         List<Photocard> GetAllPhotocard();
         Inventory UpdateInventory(Inventory inventoryToUpdate, int input, int input2);
@@ -15,5 +15,6 @@ namespace DL
         Order AddOrder(Order ord, int input1, int input2, int input3);
         Inventory StockInventory(Inventory inventoryToStock, int input);
         void RemoveCustomer(int id);
+        Customer GetOneCustomerById(int id);
     }
 }

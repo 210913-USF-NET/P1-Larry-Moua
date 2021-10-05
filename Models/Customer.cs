@@ -42,30 +42,7 @@ namespace Models
             }
         }
 
-        private string _email;
-
-        public string Email {
-            get{ return _email;}
-            set
-            {
-                Regex pattern = new Regex("^[a-zA-Z0-9@._]");
-
-                if(value.Length == 0)
-                {
-                    InputInvalidException e = new InputInvalidException("Email can't be empty");
-                    Log.Warning(e.Message);
-                    throw e;
-                }
-                else if(!pattern.IsMatch(value))
-                {
-                    throw new InputInvalidException("Email can only have alphanumerical characters, @, and . with no spaces.");
-                }
-                else
-                {
-                    _email = value;
-                }
-            }
-        }
+        public string Email { get; set; }
         public string Address { get; set; }
         public int Points { get; set; }
 

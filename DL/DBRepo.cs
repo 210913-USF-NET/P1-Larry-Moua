@@ -27,15 +27,27 @@ namespace DL
 
         }
 
-        public Customer UpdateCustomer(Customer customerToUpdate, string input)
+        public Customer UpdateCustomer(Customer customerToUpdate)
         {
+            Customer customToUpdate = new Customer()
+            {
+                Id = customerToUpdate.Id,
+                Name = customerToUpdate.Name,
+                Email = customerToUpdate.Email,
+                Address = customerToUpdate.Address,
+                Points = customerToUpdate.Points
+            };
 
-            customerToUpdate.Name = input;
+            customToUpdate = _context.Customer.Update(customToUpdate).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
             return new Customer() {
-                Name = customerToUpdate.Name
+                Id = customToUpdate.Id,
+                Name = customToUpdate.Name,
+                Email = customToUpdate.Email,
+                Address = customToUpdate.Address,
+                Points = customToUpdate.Points
             };
         }
 

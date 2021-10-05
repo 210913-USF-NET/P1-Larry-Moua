@@ -29,9 +29,9 @@ namespace RBBL
             return _repo.AddCustomer(custom);
         }
 
-        public Customer UpdateCustomer(Customer customToUpdate, string input)
+        public Customer UpdateCustomer(Customer customToUpdate)
         {
-            return _repo.UpdateCustomer(customToUpdate, input);
+            return _repo.UpdateCustomer(customToUpdate);
         }
 
         public List<Photocard> GetAllPhotocard()
@@ -62,6 +62,11 @@ namespace RBBL
         public void RemoveCustomer(int id)
         {
             _repo.RemoveCustomer(id);
+        }
+
+        public Customer GetOneCustomerById(int id)
+        {
+            return _repo.GetOneCustomerById(id);
         }
 
     }
