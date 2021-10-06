@@ -44,6 +44,10 @@ namespace RBBL
             return _repo.GetAllArtist();
         }
 
+        public Artist UpdateArtist(Artist artistToUpdate)
+        {
+            return _repo.UpdateArtist(artistToUpdate);
+        }
         public List<Photocard> GetAllPhotocard()
         {
             return _repo.GetAllPhotocard();

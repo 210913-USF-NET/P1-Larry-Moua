@@ -41,11 +41,16 @@ namespace WebUI.Controllers
         // POST: ArtistController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Artist artist)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _bl.AddArtist(artist);
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
             catch
             {

@@ -73,6 +73,25 @@ namespace DL
             ).ToList();
         }
 
+        public Artist UpdateArtist(Artist artistToUpdate)
+        {
+            Artist artToUpdate = new Artist()
+            {
+                Id = artistToUpdate.Id,
+                GroupName = artistToUpdate.GroupName
+            };
+
+            artToUpdate = _context.Artist.Update(artToUpdate).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Artist()
+            {
+                Id = artToUpdate.Id,
+                GroupName = artToUpdate.GroupName
+            };
+        }
+
         public Order AddOrder(Order ord, int input1, int input2, int input3)
         {
 

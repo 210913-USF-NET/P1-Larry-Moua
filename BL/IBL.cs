@@ -11,6 +11,7 @@ namespace RBBL
         Customer UpdateCustomer(Customer customToUpdate);
         Artist AddArtist(Artist art);
         List<Artist> GetAllArtist();
+        Artist UpdateArtist(Artist artistToUpdate);
         List<Inventory> GetAllInventory();
         List<Photocard> GetAllPhotocard();
         Inventory UpdateInventory(Inventory inventoryToUpdate, int input, int input2);
