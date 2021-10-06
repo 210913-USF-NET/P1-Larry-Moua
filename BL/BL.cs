@@ -34,6 +34,16 @@ namespace RBBL
             return _repo.UpdateCustomer(customToUpdate);
         }
 
+        public Artist AddArtist(Artist art)
+        {
+            return _repo.AddArtist(art);
+        }
+
+        public List<Artist> GetAllArtist()
+        {
+            return _repo.GetAllArtist();
+        }
+
         public List<Photocard> GetAllPhotocard()
         {
             return _repo.GetAllPhotocard();

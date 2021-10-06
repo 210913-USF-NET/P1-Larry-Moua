@@ -51,6 +51,28 @@ namespace DL
             };
         }
 
+        public Artist AddArtist(Artist art)
+        {
+
+            art = _context.Add(art).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return art;
+           
+        }
+
+        public List<Artist> GetAllArtist()
+        {
+            return _context.Artist.Select(
+                artist => new Artist()
+                {
+                    Id = artist.Id,
+                    GroupName = artist.GroupName
+                }
+            ).ToList();
+        }
+
         public Order AddOrder(Order ord, int input1, int input2, int input3)
         {
 
