@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Serilog;
 
@@ -18,6 +19,7 @@ namespace Models
 
         private string _name;
 
+        [Required]
         public string Name
         {
             get { return _name;}
@@ -42,7 +44,9 @@ namespace Models
             }
         }
 
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Address { get; set; }
         public int Points { get; set; }
 
