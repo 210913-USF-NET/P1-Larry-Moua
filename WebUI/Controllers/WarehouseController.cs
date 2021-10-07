@@ -12,7 +12,7 @@ namespace WebUI.Controllers
         // GET: WarehouseController
         public ActionResult Index()
         {
-            return Content("Hello world!");
+            return Content("Hello world");
         }
 
         // GET: WarehouseController/Details/5
