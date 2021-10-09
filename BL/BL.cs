@@ -83,5 +83,9 @@ namespace RBBL
             return _repo.GetOneCustomerById(id);
         }
 
+        public Customer GetOneCustomerByEmail(string email)
+        {
+            return _repo.GetOneCustomerByEmail(email);
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Models;
+using RBBL;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +14,7 @@ namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -31,6 +35,11 @@ namespace WebUI.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View("~/Views/Customer/Create.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

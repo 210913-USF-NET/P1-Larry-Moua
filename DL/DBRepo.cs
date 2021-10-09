@@ -145,6 +145,13 @@ namespace DL
                     .FirstOrDefault(c => c.Id == id);
         }
 
+        public Customer GetOneCustomerByEmail(string email)
+        {
+            return _context.Customer
+                    .AsNoTracking()
+                    .FirstOrDefault(c => c.Email == email);
+        }
+
         public void RemoveCustomer(int id)
         {
             _context.Customer.Remove(GetOneCustomerById(id));

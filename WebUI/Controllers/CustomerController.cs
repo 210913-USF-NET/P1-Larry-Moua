@@ -17,6 +17,11 @@ namespace WebUI.Controllers
         {
             _bl = bl;
         }
+
+        public ActionResult Confirm()
+        {
+            return View();
+        }
         // GET: CustomerController
         public ActionResult Index()
         {
@@ -40,7 +45,7 @@ namespace WebUI.Controllers
                 if (ModelState.IsValid)
                 {
                     _bl.AddCustomer(customer);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Confirm));
                 }
                 return View();
             }

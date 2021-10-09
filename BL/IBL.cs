@@ -20,5 +20,6 @@ namespace RBBL
         Inventory StockInventory(Inventory inventoryToStock, int input);
         void RemoveCustomer(int id);
         Customer GetOneCustomerById(int id);
+        Customer GetOneCustomerByEmail(string email);
     }
 }
