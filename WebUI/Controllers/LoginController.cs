@@ -27,14 +27,37 @@ namespace WebUI.Controllers
         {
             try
             {
+                bool success = false;
                 List<Customer> allCustomer = _bl.GetAllCustomers();
                 foreach (Customer customer in allCustomer) {
                     if (customer.Email == email)
                     {
+                        HttpContext.Response.Cookies.Append("userEmail", email);
+                        HttpContext.Response.Cookies.Append("user", "true");
+                        HttpContext.Response.Cookies.Append("admin", "false");
+                        HttpContext.Response.Cookies.Append("warehouse", "US");
+                        success = true;
                         return View(_bl.GetOneCustomerByEmail(email));
                     }
                 }
+
+                if (email == "@dmin")
+                {
+                    HttpContext.Response.Cookies.Append("userEmail", email);
+                    HttpContext.Response.Cookies.Append("user", "false");
+                    HttpContext.Response.Cookies.Append("admin", "true");
+                    HttpContext.Response.Cookies.Append("warehouse", "US");
+                    success = true;
+                    return Content("Welcome Admin.");
+                }
+
+                if (!success)
+                {
+                    return Content("Input does not match our records. Please try again.");
+                }
+
                 return RedirectToAction(nameof(Index));
+
             }
             catch
             {
