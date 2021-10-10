@@ -1,11 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    string status = (string)ViewData["status"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Kpop Snapshot!</h1>
-    <p>Please create a new account or log in.</p>
-    <h3><a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Create">New User</a></h3>
-    <span></span>
-    <h3><a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a></h3>
-</div>
+@if (status == "user")
+{
+    <partial name="_UserIndex" view-data="ViewData" />
+}
+
+@if (status == "guest")
+{
+    <partial name="_GuestIndex" view-data="ViewData" />
+}
+
+@if (status == "admin")
+{
+    <partial name="_AdminIndex" view-data="ViewData" />
+}

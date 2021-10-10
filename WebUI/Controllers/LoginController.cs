@@ -48,7 +48,7 @@ namespace WebUI.Controllers
                     HttpContext.Response.Cookies.Append("admin", "true");
                     HttpContext.Response.Cookies.Append("warehouse", "US");
                     success = true;
-                    return Content("Welcome Admin.");
+                    return RedirectToAction(nameof(Index));
                 }
 
                 if (!success)

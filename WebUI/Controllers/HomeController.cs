@@ -24,11 +24,26 @@ namespace WebUI.Controllers
 
         public IActionResult Index()
         {
+            var userCheck = HttpContext.Request.Cookies["user"];
+            var adminCheck = HttpContext.Request.Cookies["admin"];
+            if (userCheck == "true")
+            {
+                ViewData["status"] = "user";
+            } else if (adminCheck == "true")
+            {
+                ViewData["status"] = "admin";
+            }
+            else
+            {
+                ViewData["status"] = "guest";
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
+            HttpContext.Response.Cookies.Append("user", "false");
+            HttpContext.Response.Cookies.Append("admin", "false");
             return View();
         }
 
