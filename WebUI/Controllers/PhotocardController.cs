@@ -10,14 +10,14 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-    public class WarehouseController : Controller
+    public class PhotocardController : Controller
     {
         private IBL _bl;
-        public WarehouseController(IBL bl)
+        public PhotocardController(IBL bl)
         {
             _bl = bl;
         }
-        // GET: WarehouseController
+        // GET: PhotocardController
         public ActionResult Index()
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -25,11 +25,11 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
-            return View(allWarehouse);
+            List<Photocard> allPhotocard = _bl.GetAllPhotocard();
+            return View(allPhotocard);
         }
 
-        // GET: WarehouseController/Create
+        // GET: PhotocardController/Create
         public ActionResult Create()
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -40,16 +40,16 @@ namespace WebUI.Controllers
             return View();
         }
 
-        // POST: WarehouseController/Create
+        // POST: PhotocardController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Warehouse warehouse)
+        public ActionResult Create(Photocard photocard)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _bl.AddWarehouse(warehouse);
+                    _bl.AddPhotocard(photocard);
                     return RedirectToAction(nameof(Index));
                 }
                 return View();
@@ -60,7 +60,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: WarehouseController/Edit/5
+        // GET: PhotocardController/Edit/5
         public ActionResult Edit(int id)
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -68,26 +68,26 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            return View(_bl.GetOneWarehouseById(id));
+            return View(_bl.GetOnePhotocardById(id));
         }
 
-        // POST: WarehouseController/Edit/5
+        // POST: PhotocardController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Warehouse warehouse)
+        public ActionResult Edit(int id, Photocard photocard)
         {
             try
             {
-                _bl.UpdateWarehouse(warehouse);
+                _bl.UpdatePhotocard(photocard);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Edit));
             }
         }
 
-        // GET: WarehouseController/Delete/5
+        // GET: PhotocardController/Delete/5
         public ActionResult Delete(int id)
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -95,17 +95,17 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            return View(_bl.GetOneWarehouseById(id));
+            return View(_bl.GetOnePhotocardById(id));
         }
 
-        // POST: WarehouseController/Delete/5
+        // POST: PhotocardController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Photocard photocard)
         {
             try
             {
-                _bl.RemoveWarehouse(id);
+                _bl.RemovePhotocard(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

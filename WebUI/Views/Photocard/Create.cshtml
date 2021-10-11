@@ -1,0 +1,61 @@
+﻿@model Models.Photocard
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Photocard</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StageNameId" class="control-label"></label>
+                <input asp-for="StageNameId" class="form-control" />
+                <span asp-validation-for="StageNameId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupNameId" class="control-label"></label>
+                <input asp-for="GroupNameId" class="form-control" />
+                <span asp-validation-for="GroupNameId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlbumId" class="control-label"></label>
+                <input asp-for="AlbumId" class="form-control" />
+                <span asp-validation-for="AlbumId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetId" class="control-label"></label>
+                <input asp-for="SetId" class="form-control" />
+                <span asp-validation-for="SetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PointPrice" class="control-label"></label>
+                <input asp-for="PointPrice" class="form-control" />
+                <span asp-validation-for="PointPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PointValue" class="control-label"></label>
+                <input asp-for="PointValue" class="form-control" />
+                <span asp-validation-for="PointValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

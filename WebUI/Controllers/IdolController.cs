@@ -10,14 +10,16 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-    public class WarehouseController : Controller
+
+    public class IdolController : Controller
     {
         private IBL _bl;
-        public WarehouseController(IBL bl)
+        public IdolController(IBL bl)
         {
             _bl = bl;
         }
-        // GET: WarehouseController
+
+        // GET: IdolController
         public ActionResult Index()
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -25,11 +27,12 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
-            return View(allWarehouse);
+
+            List<Idol> allIdol = _bl.GetAllIdol();
+            return View(allIdol);
         }
 
-        // GET: WarehouseController/Create
+        // GET: IdolController/Create
         public ActionResult Create()
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -40,16 +43,16 @@ namespace WebUI.Controllers
             return View();
         }
 
-        // POST: WarehouseController/Create
+        // POST: IdolController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Warehouse warehouse)
+        public ActionResult Create(Idol idol)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _bl.AddWarehouse(warehouse);
+                    _bl.AddIdol(idol);
                     return RedirectToAction(nameof(Index));
                 }
                 return View();
@@ -60,7 +63,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: WarehouseController/Edit/5
+        // GET: IdolController/Edit/5
         public ActionResult Edit(int id)
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -68,17 +71,17 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            return View(_bl.GetOneWarehouseById(id));
+            return View(_bl.GetOneIdolById(id));
         }
 
-        // POST: WarehouseController/Edit/5
+        // POST: IdolController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Warehouse warehouse)
+        public ActionResult Edit(int id, Idol idol)
         {
             try
             {
-                _bl.UpdateWarehouse(warehouse);
+                _bl.UpdateIdol(idol);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -87,7 +90,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: WarehouseController/Delete/5
+        // GET: IdolController/Delete/5
         public ActionResult Delete(int id)
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];
@@ -95,17 +98,17 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            return View(_bl.GetOneWarehouseById(id));
+            return View(_bl.GetOneIdolById(id));
         }
 
-        // POST: WarehouseController/Delete/5
+        // POST: IdolController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Idol idol)
         {
             try
             {
-                _bl.RemoveWarehouse(id);
+                _bl.RemoveIdol(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Serilog;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Models
 {
@@ -15,6 +17,7 @@ namespace Models
 
         private int _stock;
 
+        [Range(0, 9999)]
         public int Stock
         {
             get { return _stock;}

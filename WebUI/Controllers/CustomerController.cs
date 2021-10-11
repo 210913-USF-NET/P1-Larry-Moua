@@ -25,6 +25,11 @@ namespace WebUI.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
+            var adminCheck = HttpContext.Request.Cookies["admin"];
+            if (adminCheck == "true")
+            {
+                ViewData["status"] = "admin";
+            }
             List<Customer> allCustomer = _bl.GetAllCustomers();
             return View(allCustomer);
         }
@@ -80,6 +85,11 @@ namespace WebUI.Controllers
         // GET: CustomerController/Delete/5
         public ActionResult Delete(int id)
         {
+            var adminCheck = HttpContext.Request.Cookies["admin"];
+            if (adminCheck == "true")
+            {
+                ViewData["status"] = "admin";
+            }
             return View(_bl.GetOneCustomerById(id));
         }
 

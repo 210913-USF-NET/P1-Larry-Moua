@@ -53,9 +53,9 @@ namespace RBBL
             return _repo.GetAllPhotocard();
         }
 
-        public Inventory UpdateInventory(Inventory inventoryToUpdate, int input, int input2)
+        public Inventory UpdateInventory(Inventory inventoryToUpdate)
         {
-            return _repo.UpdateInventory(inventoryToUpdate, input, input2);
+            return _repo.UpdateInventory(inventoryToUpdate);
         }
 
         public List<Order> GetAllOrders()
@@ -101,6 +101,107 @@ namespace RBBL
         public Album UpdateAlbum(Album albumToUpdate)
         {
             return _repo.UpdateAlbum(albumToUpdate);
+        }
+
+        public Idol AddIdol(Idol idol)
+        {
+            return _repo.AddIdol(idol);
+        }
+
+        public List<Idol> GetAllIdol()
+        {
+            return _repo.GetAllIdol();
+        }
+
+        public Idol UpdateIdol(Idol idolToUpdate)
+        {
+            return _repo.UpdateIdol(idolToUpdate);
+        }
+
+        public Photocard AddPhotocard(Photocard photocard)
+        {
+            return _repo.AddPhotocard(photocard);
+        }
+
+        public Photocard UpdatePhotocard(Photocard photocardToUpdate)
+        {
+            return _repo.UpdatePhotocard(photocardToUpdate);
+        }
+
+        public Warehouse AddWarehouse(Warehouse warehouse)
+        {
+            return _repo.AddWarehouse(warehouse);
+        }
+
+        public List<Warehouse> GetAllWarehouse()
+        {
+            return _repo.GetAllWarehouse();
+        }
+
+        public Warehouse UpdateWarehouse(Warehouse warehouseToUpdate)
+        {
+            return _repo.UpdateWarehouse(warehouseToUpdate);
+        }
+
+        public Inventory AddInventory(Inventory invent)
+        {
+            return _repo.AddInventory(invent);
+        }
+
+        public Artist GetOneArtistById(int id)
+        {
+            return _repo.GetOneArtistById(id);
+        }
+        public Album GetOneAlbumById(int id)
+        {
+            return _repo.GetOneAlbumById(id);
+        }
+        public Idol GetOneIdolById(int id)
+        {
+            return _repo.GetOneIdolById(id);
+        }
+
+        public Photocard GetOnePhotocardById(int id)
+        {
+            return _repo.GetOnePhotocardById(id);
+        }
+
+        public Warehouse GetOneWarehouseById(int id)
+        {
+            return _repo.GetOneWarehouseById(id);
+        }
+
+        public void RemoveArtist(int id)
+        {
+            _repo.RemoveArtist(id);
+        }
+
+        public void RemoveAlbum(int id)
+        {
+            _repo.RemoveAlbum(id);
+        }
+
+        public void RemoveIdol(int id)
+        {
+            _repo.RemoveIdol(id);
+        }
+        public void RemovePhotocard(int id)
+        {
+            _repo.RemovePhotocard(id);
+        }
+        public void RemoveWarehouse(int id)
+        {
+            _repo.RemoveWarehouse(id);
+        }
+
+        public Inventory GetOneInventoryById(int id)
+        {
+            return _repo.GetOneInventoryById(id);
+        }
+
+        public void RemoveInventory(int id)
+        {
+            _repo.RemoveInventory(id);
         }
     }
 }

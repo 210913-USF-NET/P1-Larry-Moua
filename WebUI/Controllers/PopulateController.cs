@@ -10,6 +10,11 @@ namespace WebUI.Controllers
     {
         public IActionResult Index()
         {
+            var adminCheck = HttpContext.Request.Cookies["admin"];
+            if (adminCheck == "true")
+            {
+                ViewData["status"] = "admin";
+            }
             return View();
         }
     }
