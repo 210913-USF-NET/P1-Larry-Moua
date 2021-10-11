@@ -19,7 +19,9 @@ namespace DL
         Inventory StockInventory(Inventory inventoryToStock, int input);
         void RemoveCustomer(int id);
         Customer GetOneCustomerById(int id);
-
         Customer GetOneCustomerByEmail(string email);
+        Album AddAlbum(Album album);
+        List<Album> GetAllAlbum();
+        Album UpdateAlbum(Album albumToUpdate);
     }
 }

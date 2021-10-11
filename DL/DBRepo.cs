@@ -92,6 +92,50 @@ namespace DL
             };
         }
 
+        public Album AddAlbum(Album album)
+        {
+
+            album = _context.Add(album).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return album;
+
+        }
+
+        public List<Album> GetAllAlbum()
+        {
+            return _context.Album.Select(
+                album => new Album()
+                {
+                    Id = album.Id,
+                    AlbumName = album.AlbumName,
+                    ArtistId = album.ArtistId
+                }
+            ).ToList();
+        }
+
+        public Album UpdateAlbum(Album albumToUpdate)
+        {
+            Album albToUpdate = new Album()
+            {
+                Id = albumToUpdate.Id,
+                AlbumName = albumToUpdate.AlbumName,
+                ArtistId = albumToUpdate.ArtistId
+            };
+
+            albumToUpdate = _context.Album.Update(albToUpdate).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Album()
+            {
+                Id = albToUpdate.Id,
+                AlbumName = albumToUpdate.AlbumName,
+                ArtistId = albumToUpdate.ArtistId
+            };
+        }
+
         public Order AddOrder(Order ord, int input1, int input2, int input3)
         {
 

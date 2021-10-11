@@ -22,4 +22,10 @@
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Idol\" />
+    <Folder Include="Views\Inventory\" />
+    <Folder Include="Views\Photocard\" />
+  </ItemGroup>
+
 </Project>

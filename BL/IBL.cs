@@ -21,5 +21,8 @@ namespace RBBL
         void RemoveCustomer(int id);
         Customer GetOneCustomerById(int id);
         Customer GetOneCustomerByEmail(string email);
+        Album AddAlbum(Album album);
+        List<Album> GetAllAlbum();
+        Album UpdateAlbum(Album albumToUpdate);
     }
 }

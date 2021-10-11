@@ -87,5 +87,20 @@ namespace RBBL
         {
             return _repo.GetOneCustomerByEmail(email);
         }
+
+        public Album AddAlbum(Album album)
+        {
+            return _repo.AddAlbum(album);
+        }
+
+        public List<Album> GetAllAlbum()
+        {
+            return _repo.GetAllAlbum();
+        }
+
+        public Album UpdateAlbum(Album albumToUpdate)
+        {
+            return _repo.UpdateAlbum(albumToUpdate);
+        }
     }
 }
