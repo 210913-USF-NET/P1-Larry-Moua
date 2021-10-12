@@ -29,17 +29,6 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData("$*#!@#$%")]
-        [InlineData(" 123@yahoo.com")]
-        public void CustomerShouldNotAllowInvalidEmail(string input)
-        {
-            Customer test = new Customer();
-
-            Assert.Throws<InputInvalidException>(() => test.Email = input);
-        }
-
-        [Theory]
         [InlineData(-1)]
         [InlineData(10000)]
         [InlineData(-14)]

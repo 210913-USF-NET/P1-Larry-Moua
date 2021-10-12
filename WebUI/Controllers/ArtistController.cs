@@ -22,11 +22,7 @@ namespace WebUI.Controllers
         // GET: ArtistController
         public ActionResult Index()
         {
-            var adminCheck = HttpContext.Request.Cookies["admin"];
-            if (adminCheck == "true")
-            {
-                ViewData["status"] = "admin";
-            }
+            ViewData["status"] = "admin";
             List<Artist> allArtist = _bl.GetAllArtist();
             return View(allArtist);
         }

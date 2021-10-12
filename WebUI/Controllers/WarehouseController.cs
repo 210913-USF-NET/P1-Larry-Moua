@@ -59,11 +59,7 @@ namespace WebUI.Controllers
         }
         public ActionResult Index()
         {
-            var adminCheck = HttpContext.Request.Cookies["admin"];
-            if (adminCheck == "true")
-            {
-                ViewData["status"] = "admin";
-            }
+            ViewData["status"] = "admin";
             List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
             return View(allWarehouse);
         }

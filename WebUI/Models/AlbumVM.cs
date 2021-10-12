@@ -7,6 +7,7 @@ namespace WebUI.Models
 {
     public class AlbumVM
     {
+        public int Id { get; set; }
         public string AlbumName { get; set; }
         public string ArtistName { get; set; }
     }

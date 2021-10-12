@@ -25,7 +25,7 @@ namespace WebUI.Controllers
             List<Album> allAlbum = _bl.GetAllAlbum();
             var viewmodelResult = from p in allArtist
                                   join k in allAlbum on p.Id equals k.ArtistId
-                                  select new AlbumVM { AlbumName = k.AlbumName, ArtistName = p.GroupName };
+                                  select new AlbumVM { Id = k.Id, AlbumName = k.AlbumName, ArtistName = p.GroupName };
             return View(viewmodelResult);
         }
 

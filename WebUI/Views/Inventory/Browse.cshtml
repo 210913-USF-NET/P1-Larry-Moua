@@ -4,10 +4,11 @@
     ViewData["Title"] = "Browse";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Context.Response.Cookies.Append("checkoutMsg", "");
+    string warehouse = Context.Request.Cookies["warehouse"];
 }
 
 <h1>Browse</h1>
-
+<h3>Warehouse @warehouse</h3>
 <table class="table">
     <thead>
         <tr>
