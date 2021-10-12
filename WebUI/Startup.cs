@@ -27,6 +27,9 @@ namespace WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
+                });
             services.AddDbContext<RRDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("kpop-db")));
             services.AddScoped<IRepo, DBRepo>();
             services.AddScoped<IBL, BL>();
@@ -47,6 +50,8 @@ namespace WebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

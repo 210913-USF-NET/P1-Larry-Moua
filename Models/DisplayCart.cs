@@ -5,6 +5,6 @@ namespace Models
 {
     public class DisplayCart
     {
-        public static List<Product> cart = new List<Product>();
+        public static List<Photocard> cart = new List<Photocard>();
     }
 }

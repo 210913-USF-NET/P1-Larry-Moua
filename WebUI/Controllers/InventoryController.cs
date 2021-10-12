@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using RBBL;
 using Models;
 using WebUI.Models;
+using Newtonsoft.Json;
 
 namespace WebUI.Controllers
 {
@@ -75,8 +76,14 @@ namespace WebUI.Controllers
             {
                 int currentItemId = Int32.Parse(HttpContext.Request.Cookies["currentItem"]);
                 var selectInventory = _bl.GetOneInventoryById(currentItemId);
+                var selectPhotocard = _bl.GetOnePhotocardById(selectInventory.PhotocardId);
                 _bl.StockInventory(selectInventory, 1);
                 HttpContext.Response.Cookies.Append("currentItem", "");
+
+                DisplayCart.cart.Add(selectPhotocard);
+
+                //HttpContext.Session.SetString("CartSession", JsonConvert.SerializeObject(selectPhotocard));
+
                 return RedirectToAction(nameof(Browse));
             }
             catch

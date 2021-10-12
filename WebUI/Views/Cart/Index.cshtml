@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Models.Photocard>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StageNameId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupNameId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SetId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StageNameId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupNameId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlbumId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
