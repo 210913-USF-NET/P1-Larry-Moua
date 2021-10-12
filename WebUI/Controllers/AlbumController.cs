@@ -21,10 +21,12 @@ namespace WebUI.Controllers
         // GET: AlbumController
         public ActionResult Index()
         {
+            ViewData["status"] = "admin";
             List<Artist> allArtist = _bl.GetAllArtist();
             List<Album> allAlbum = _bl.GetAllAlbum();
             var viewmodelResult = from p in allArtist
                                   join k in allAlbum on p.Id equals k.ArtistId
+                                  orderby k.Id
                                   select new AlbumVM { Id = k.Id, AlbumName = k.AlbumName, ArtistName = p.GroupName };
             return View(viewmodelResult);
         }
@@ -33,6 +35,7 @@ namespace WebUI.Controllers
         // GET: AlbumController/Create
         public ActionResult Create()
         {
+            ViewData["status"] = "admin";
             return View();
         }
 
@@ -59,37 +62,41 @@ namespace WebUI.Controllers
         // GET: AlbumController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ViewData["status"] = "admin";
+            return View(_bl.GetOneAlbumById(id));
         }
 
         // POST: AlbumController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Album album)
         {
             try
             {
+                _bl.UpdateAlbum(album);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Edit));
             }
         }
 
         // GET: AlbumController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ViewData["status"] = "admin";
+            return View(_bl.GetOneAlbumById(id));
         }
 
         // POST: AlbumController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Album album)
         {
             try
             {
+                _bl.RemoveAlbum(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

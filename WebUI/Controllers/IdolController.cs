@@ -29,7 +29,12 @@ namespace WebUI.Controllers
             }
 
             List<Idol> allIdol = _bl.GetAllIdol();
-            return View(allIdol);
+            List<Artist> allArtist = _bl.GetAllArtist();
+            var viewmodelResult = from p in allArtist
+                                  join k in allIdol on p.Id equals k.GroupId
+                                  orderby k.Id
+                                  select new IdolVM { Id = k.Id, StageName = k.StageName, GroupName = p.GroupName };
+            return View(viewmodelResult);
         }
 
         // GET: IdolController/Create
