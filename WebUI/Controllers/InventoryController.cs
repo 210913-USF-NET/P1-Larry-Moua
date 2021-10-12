@@ -18,6 +18,72 @@ namespace WebUI.Controllers
             _bl = bl;
         }
         // GET: InventoryController
+        public ActionResult Browse()
+        {
+            var userCheck = HttpContext.Request.Cookies["user"];
+            if (userCheck == "true")
+            {
+                ViewData["status"] = "user";
+            }
+            List<Product> tempCatalog = new List<Product>();
+            List<Photocard> allPhoto = _bl.GetAllPhotocard();
+            List<Inventory> allInvent = _bl.GetAllInventory();
+            var wareCheck = HttpContext.Request.Cookies["warehouse"];
+            int wareId = 0;
+            string setName = "";
+            decimal setPrice = 0;
+            if (wareCheck == "US")
+            {
+                wareId = 1;
+            } else if (wareCheck == "DE")
+            {
+                wareId = 2;
+            } else if (wareCheck == "KR")
+            {
+                wareId = 3;
+            }
+
+            foreach (Inventory invent in allInvent)
+            {
+                if (wareId == invent.WarehouseId && invent.Stock !=0)
+                {
+                    foreach (Photocard photo in allPhoto)
+                    {
+                        if (invent.PhotocardId == photo.Id)
+                        {
+                            setName = photo.SetId;
+                            setPrice = photo.Price;
+                        }
+                    }
+                    tempCatalog.Add(new Product(invent.Id, wareId, invent.PhotocardId, setName, setPrice, invent.Stock));
+                }
+            }
+            return View(tempCatalog);
+        }
+
+        public ActionResult Add(int inventoryId)
+        {
+            HttpContext.Response.Cookies.Append("currentItem", inventoryId.ToString());
+            return View(_bl.GetOneInventoryById(inventoryId));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(int inventoryId, Inventory inventory)
+        {
+            try
+            {
+                int currentItemId = Int32.Parse(HttpContext.Request.Cookies["currentItem"]);
+                var selectInventory = _bl.GetOneInventoryById(currentItemId);
+                _bl.StockInventory(selectInventory, 1);
+                HttpContext.Response.Cookies.Append("currentItem", "");
+                return RedirectToAction(nameof(Browse));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Browse));
+            }
+        }
         public ActionResult Index()
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];

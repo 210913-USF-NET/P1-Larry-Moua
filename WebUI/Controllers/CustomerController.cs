@@ -20,6 +20,11 @@ namespace WebUI.Controllers
 
         public ActionResult Confirm()
         {
+            var userCheck = HttpContext.Request.Cookies["user"];
+            if (userCheck == "true")
+            {
+                ViewData["status"] = "user";
+            }
             return View();
         }
         // GET: CustomerController

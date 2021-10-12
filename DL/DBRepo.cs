@@ -450,7 +450,7 @@ namespace DL
         public Inventory StockInventory(Inventory inventoryToStock, int input)
         {
 
-            inventoryToStock.Stock = input;
+            inventoryToStock.Stock--;
             inventoryToStock = _context.Inventory.Update(inventoryToStock).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();

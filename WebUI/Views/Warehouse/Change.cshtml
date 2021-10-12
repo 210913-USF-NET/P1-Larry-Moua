@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Models.Warehouse>
+
+@{
+    ViewData["Title"] = "Change";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string warehouse = Context.Request.Cookies["warehouse"];
+}
+
+<h1>Change Location</h1>
+<h3>You are currently at Warehouse @warehouse</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ChangeTo">
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">WarehouseId</label>
+                <input class="form-control" name="warehouse" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Change" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Models.Product>
+
+@{
+    ViewData["Title"] = "Browse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Browse</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.inventoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.warehouseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.photocardId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.setName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stock)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.inventoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.warehouseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.photocardId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.setName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stock)
+            </td>
+            <td>
+                @Html.ActionLink("Add", "Add", new { item.inventoryId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -18,6 +18,45 @@ namespace WebUI.Controllers
             _bl = bl;
         }
         // GET: WarehouseController
+
+        public ActionResult Change()
+        {
+            var userCheck = HttpContext.Request.Cookies["user"];
+            if (userCheck == "true")
+            {
+                ViewData["status"] = "user";
+            }
+
+            List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
+            return View(allWarehouse);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeTo(string warehouse)
+        {
+            try
+            {
+                if (warehouse == "1")
+                {
+                    HttpContext.Response.Cookies.Append("warehouse", "US");
+                }
+
+                if (warehouse == "2")
+                {
+                    HttpContext.Response.Cookies.Append("warehouse", "DE");
+                }
+
+                if (warehouse == "3")
+                {
+                    HttpContext.Response.Cookies.Append("warehouse", "KR");
+                }
+                return RedirectToAction(nameof(Change));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Change));
+            }
+        }
         public ActionResult Index()
         {
             var adminCheck = HttpContext.Request.Cookies["admin"];

@@ -7,17 +7,21 @@ namespace Models
     {
         public Product() {}
 
-        public Product(int warehouseId, int photocardId, string setName, decimal price) {
+        public Product(int inventoryId, int warehouseId, int photocardId, string setName, decimal price, int stock) {
+            this.inventoryId = inventoryId;
             this.warehouseId = warehouseId;
             this.photocardId = photocardId;
             this.setName = setName;
             this.price = price;
+            this.stock = stock;
         }  
 
+        public int inventoryId { get; set; }
         public int warehouseId {get; set;}
         public int photocardId {get; set;}
         public string setName {get; set;}
         public decimal price {get; set;}
+        public int stock { get; set; }
 
         public override string ToString()
         {

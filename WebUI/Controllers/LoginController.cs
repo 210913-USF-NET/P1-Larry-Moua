@@ -20,6 +20,11 @@ namespace WebUI.Controllers
         // GET: LoginController
         public ActionResult Index()
         {
+            var userCheck = HttpContext.Request.Cookies["user"];
+            if (userCheck == "true")
+            {
+                ViewData["status"] = "user";
+            }
             return View();
         }
 
@@ -36,6 +41,7 @@ namespace WebUI.Controllers
                         HttpContext.Response.Cookies.Append("user", "true");
                         HttpContext.Response.Cookies.Append("admin", "false");
                         HttpContext.Response.Cookies.Append("warehouse", "US");
+                        HttpContext.Response.Cookies.Append("userName", customer.Name);
                         success = true;
                         return View(_bl.GetOneCustomerByEmail(email));
                     }
@@ -47,6 +53,7 @@ namespace WebUI.Controllers
                     HttpContext.Response.Cookies.Append("user", "false");
                     HttpContext.Response.Cookies.Append("admin", "true");
                     HttpContext.Response.Cookies.Append("warehouse", "US");
+                    HttpContext.Response.Cookies.Append("userName", "@dmin");
                     success = true;
                     return RedirectToAction(nameof(Index));
                 }
