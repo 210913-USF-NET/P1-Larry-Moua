@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Inventory>
+﻿@model IEnumerable<WebUI.Models.InventoryVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,10 +17,10 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WarehouseId)
+                @Html.DisplayNameFor(model => model.WarehouseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhotocardId)
+                @Html.DisplayNameFor(model => model.PhotocardSet)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Stock)
@@ -36,10 +36,10 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WarehouseId)
+                @Html.DisplayFor(modelItem => item.WarehouseName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotocardId)
+                @Html.DisplayFor(modelItem => item.PhotocardSet)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stock)

@@ -25,8 +25,22 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
+            List<Idol> allIdol = _bl.GetAllIdol();
+            List<Artist> allArtist = _bl.GetAllArtist();
+            List<Album> allAlbum = _bl.GetAllAlbum();
             List<Photocard> allPhotocard = _bl.GetAllPhotocard();
-            return View(allPhotocard);
+            var viewmodelResult = from p in allPhotocard
+                                  join k in allIdol on p.StageNameId equals k.Id
+                                  join art in allArtist on p.GroupNameId equals art.Id
+                                  join alb in allAlbum on p.AlbumId equals alb.Id
+                                  orderby k.Id
+                                  select new PhotocardVM { Id = p.Id, StageName = k.StageName, GroupName = art.GroupName, AlbumName = alb.AlbumName, SetId = p.SetId, Price = p.Price };
+            return View(viewmodelResult);
+
+            /*List<Photocard> allPhotocard = _bl.GetAllPhotocard();
+            return View(allPhotocard);*/
+
+
         }
 
         // GET: PhotocardController/Create

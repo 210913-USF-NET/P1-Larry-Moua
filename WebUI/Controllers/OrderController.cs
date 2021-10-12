@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Models;
 using RBBL;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -20,8 +21,12 @@ namespace WebUI.Controllers
         public ActionResult Index()
         {
             List<Order> allOrd = _bl.GetAllOrders();
+            List<Customer> allCustomer = _bl.GetAllCustomers();
+            List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
+            List<Photocard> allPhotocard = _bl.GetAllPhotocard();
             List<Order> tempOrd = new List<Order>();
-            int userId = Int32.Parse(HttpContext.Request.Cookies["userId"]);
+            int userId;
+            int.TryParse(HttpContext.Request.Cookies["userId"], out userId);
             var userCheck = HttpContext.Request.Cookies["user"];
             if (userCheck == "true")
             {
@@ -33,12 +38,25 @@ namespace WebUI.Controllers
                         tempOrd.Add(ord);
                     }
                 }
-                return View(tempOrd);
+                var viewmodelResult = from p in tempOrd
+                                      join k in allCustomer on p.CustomerId equals k.Id
+                                      join w in allWarehouse on p.WarehouseId equals w.Id
+                                      join photo in allPhotocard on p.PhotocardId equals photo.Id
+                                      orderby k.Id
+                                      select new OrderVM { Id = p.Id, CustomerEmail = k.Email, WarehouseName = w.Name, PhotocardName = photo.SetId, DateandTime = p.DateandTime};
+                return View(viewmodelResult);
+                //return View(tempOrd);
             }
             else
             {
                 ViewData["status"] = "admin";
-                return View(_bl.GetAllOrders());
+                var viewmodelResult = from p in allOrd
+                                      join k in allCustomer on p.CustomerId equals k.Id
+                                      join w in allWarehouse on p.WarehouseId equals w.Id
+                                      join photo in allPhotocard on p.PhotocardId equals photo.Id
+                                      orderby p.Id
+                                      select new OrderVM { Id = p.Id, CustomerEmail = k.Email, WarehouseName = w.Name, PhotocardName = photo.SetId, DateandTime = p.DateandTime };
+                return View(viewmodelResult);
             }
 
         }

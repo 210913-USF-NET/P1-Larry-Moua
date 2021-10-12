@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Product>
+﻿@model IEnumerable<WebUI.Models.InventoryVM>
 
 @{
     ViewData["Title"] = "Browse";
@@ -13,22 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.inventoryId)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.warehouseId)
+                @Html.DisplayNameFor(model => model.WarehouseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.photocardId)
+                @Html.DisplayNameFor(model => model.PhotocardSet)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.setName)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stock)
+                @Html.DisplayNameFor(model => model.Stock)
             </th>
         </tr>
     </thead>
@@ -36,25 +33,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.inventoryId)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.warehouseId)
+                @Html.DisplayFor(modelItem => item.WarehouseName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.photocardId)
+                @Html.DisplayFor(modelItem => item.PhotocardSet)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.setName)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.price)
+                @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.stock)
-            </td>
-            <td>
-                @Html.ActionLink("Add", "Add", new { item.inventoryId })
+                @Html.ActionLink("Add", "Add", new { item.Id })
             </td>
         </tr>
 }

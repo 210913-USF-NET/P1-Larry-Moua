@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Photocard>
+﻿@model IEnumerable<WebUI.Models.PhotocardVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,13 +17,13 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StageNameId)
+                @Html.DisplayNameFor(model => model.StageName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupNameId)
+                @Html.DisplayNameFor(model => model.GroupName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AlbumId)
+                @Html.DisplayNameFor(model => model.AlbumName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SetId)
@@ -41,13 +41,13 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StageNameId)
+                @Html.DisplayFor(modelItem => item.StageName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GroupNameId)
+                @Html.DisplayFor(modelItem => item.GroupName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AlbumId)
+                @Html.DisplayFor(modelItem => item.AlbumName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SetId)

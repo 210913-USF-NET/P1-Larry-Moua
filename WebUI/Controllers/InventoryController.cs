@@ -28,6 +28,7 @@ namespace WebUI.Controllers
             List<Product> tempCatalog = new List<Product>();
             List<Photocard> allPhoto = _bl.GetAllPhotocard();
             List<Inventory> allInvent = _bl.GetAllInventory();
+            List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
             var wareCheck = HttpContext.Request.Cookies["warehouse"];
             int wareId = 0;
             string setName = "";
@@ -58,18 +59,24 @@ namespace WebUI.Controllers
                     tempCatalog.Add(new Product(invent.Id, wareId, invent.PhotocardId, setName, setPrice, invent.Stock));
                 }
             }
-            return View(tempCatalog);
+            var viewmodelResult = from p in tempCatalog
+                                  join k in allWarehouse on p.warehouseId equals k.Id
+                                  join photo in allPhoto on p.photocardId equals photo.Id
+                                  orderby k.Id
+                                  select new InventoryVM { Id = p.inventoryId, WarehouseName = k.Name, PhotocardSet = photo.SetId, Price = p.price, Stock = p.stock };
+            return View(viewmodelResult);
+            //return View(tempCatalog);
         }
 
-        public ActionResult Add(int inventoryId)
+        public ActionResult Add(int Id)
         {
-            HttpContext.Response.Cookies.Append("currentItem", inventoryId.ToString());
-            return View(_bl.GetOneInventoryById(inventoryId));
+            HttpContext.Response.Cookies.Append("currentItem", Id.ToString());
+            return View(_bl.GetOneInventoryById(Id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(int inventoryId, Inventory inventory)
+        public ActionResult Add(int Id, Inventory inventory)
         {
             try
             {
@@ -97,8 +104,15 @@ namespace WebUI.Controllers
             {
                 ViewData["status"] = "admin";
             }
-            List<Inventory> allInventory = _bl.GetAllInventory();
-            return View(allInventory);
+            List<Photocard> allPhoto = _bl.GetAllPhotocard();
+            List<Inventory> allInvent = _bl.GetAllInventory();
+            List<Warehouse> allWarehouse = _bl.GetAllWarehouse();
+            var viewmodelResult = from p in allInvent
+                                  join k in allWarehouse on p.WarehouseId equals k.Id
+                                  join photo in allPhoto on p.PhotocardId equals photo.Id
+                                  orderby k.Id
+                                  select new InventoryVM { Id = p.Id, WarehouseName = k.Name, PhotocardSet = photo.SetId, Stock = p.Stock };
+            return View(viewmodelResult);
         }
 
         // GET: InventoryController/Create
