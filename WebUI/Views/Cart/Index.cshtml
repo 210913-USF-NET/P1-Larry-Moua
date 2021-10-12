@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Photocard>
+﻿@model IEnumerable<Models.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,51 +6,56 @@
 }
 
 <h1>Cart</h1>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.inventoryId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StageNameId)
+                @Html.DisplayNameFor(model => model.warehouseId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupNameId)
+                @Html.DisplayNameFor(model => model.photocardId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AlbumId)
+                @Html.DisplayNameFor(model => model.setName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SetId)
+                @Html.DisplayNameFor(model => model.price)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StageNameId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GroupNameId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlbumId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SetId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.inventoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.warehouseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.photocardId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.setName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+        </tr>
+}
     </tbody>
 </table>
+@{ 
+    int totalPriceInt = 0;
+    string totalPrice = "";
+    foreach (var item in Model)
+    {
+        totalPriceInt += (int)item.price;
+    }
+    totalPrice = totalPriceInt.ToString();
+}
+<p>TOTAL: $@totalPrice</p>

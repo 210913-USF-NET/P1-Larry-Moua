@@ -80,7 +80,7 @@ namespace WebUI.Controllers
                 _bl.StockInventory(selectInventory, 1);
                 HttpContext.Response.Cookies.Append("currentItem", "");
 
-                DisplayCart.cart.Add(selectPhotocard);
+                DisplayCart.cart.Add(new Product(currentItemId, selectInventory.WarehouseId, selectInventory.PhotocardId, selectPhotocard.SetId, selectPhotocard.Price, 0));
 
                 //HttpContext.Session.SetString("CartSession", JsonConvert.SerializeObject(selectPhotocard));
 
