@@ -374,18 +374,25 @@ namespace DL
         //----------ORDER METHODS----------
         public Order AddOrder(Order ord, int input1, int input2, int input3)
         {
+            Order orderToAdd = new Order()
+            {
+                CustomerId = input1,
+                WarehouseId = input2,
+                PhotocardId = input3,
+                DateandTime = default(DateTime)
+            };
 
-            ord = _context.Add(ord).Entity;
+            orderToAdd = _context.Add(orderToAdd).Entity;
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
             return new Order()
             {
-                Id = ord.Id,
-                CustomerId = ord.CustomerId,
-                WarehouseId = ord.WarehouseId,
-                PhotocardId = ord.PhotocardId,
-                DateandTime = ord.DateandTime
+                Id = orderToAdd.Id,
+                CustomerId = orderToAdd.CustomerId,
+                WarehouseId = orderToAdd.WarehouseId,
+                PhotocardId = orderToAdd.PhotocardId,
+                DateandTime = default(DateTime)
             };
         }
         public List<Order> GetAllOrders()

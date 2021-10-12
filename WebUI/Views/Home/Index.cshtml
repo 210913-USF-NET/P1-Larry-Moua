@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     string status = (string)ViewData["status"];
+    Context.Response.Cookies.Append("checkoutMsg", "Checkout Successful.");
 }
 
 @if (status == "user")

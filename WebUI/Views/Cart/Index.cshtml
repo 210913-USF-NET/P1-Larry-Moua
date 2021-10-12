@@ -3,9 +3,11 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var checkout = Context.Request.Cookies["checkoutMsg"];
 }
 
 <h1>Cart</h1>
+<h2>@checkout</h2>
 <table class="table">
     <thead>
         <tr>
@@ -28,28 +30,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.inventoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.warehouseId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.photocardId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.setName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inventoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.warehouseId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.photocardId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.setName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-@{ 
+@{
     int totalPriceInt = 0;
     string totalPrice = "";
     foreach (var item in Model)
@@ -59,3 +62,7 @@
     totalPrice = totalPriceInt.ToString();
 }
 <p>TOTAL: $@totalPrice</p>
+
+<form asp-action="Checkout">
+    <input type="submit" value="Checkout" class="btn btn-primary" />
+</form>

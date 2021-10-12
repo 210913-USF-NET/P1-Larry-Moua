@@ -2,14 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RBBL;
 
 namespace WebUI.Controllers
 {
     public class CartController : Controller
     {
+        private IBL _bl;
+        public CartController(IBL bl)
+        {
+            _bl = bl;
+        }
         // GET: CartController
         public ActionResult Index()
         {
@@ -21,10 +24,17 @@ namespace WebUI.Controllers
             return View(DisplayCart.cart);
         }
 
-        // GET: CartController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Checkout()
         {
-            return View();
+            int userId = Int32.Parse(HttpContext.Request.Cookies["userId"]);
+            for (int i = 0; i < DisplayCart.cart.Count; i++)
+            {
+                Order newOrd = new Order();
+                _bl.AddOrder(newOrd, userId, DisplayCart.cart[i].ReturnWarehouseId(), DisplayCart.cart[i].ReturnPhotoId());
+            }
+            DisplayCart.cart.Clear();
+            HttpContext.Response.Cookies.Append("checkoutMsg", "Checkout Successful.");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

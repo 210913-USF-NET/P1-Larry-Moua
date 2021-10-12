@@ -38,6 +38,7 @@ namespace WebUI.Controllers
                     if (customer.Email == email)
                     {
                         HttpContext.Response.Cookies.Append("userEmail", email);
+                        HttpContext.Response.Cookies.Append("userId", customer.Id.ToString());
                         HttpContext.Response.Cookies.Append("user", "true");
                         HttpContext.Response.Cookies.Append("admin", "false");
                         HttpContext.Response.Cookies.Append("warehouse", "US");
