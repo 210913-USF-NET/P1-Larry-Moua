@@ -25,6 +25,7 @@ namespace WebUI.Controllers
             var userCheck = HttpContext.Request.Cookies["user"];
             if (userCheck == "true")
             {
+                ViewData["status"] = "user";
                 foreach (Order ord in allOrd)
                 {
                     if (userId == ord.CustomerId)
@@ -36,6 +37,7 @@ namespace WebUI.Controllers
             }
             else
             {
+                ViewData["status"] = "admin";
                 return View(_bl.GetAllOrders());
             }
 

@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Models.Album>
-
+﻿@model IEnumerable<WebUI.Models.AlbumVM>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <h1>Index</h1>
 
@@ -14,35 +14,26 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.AlbumName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ArtistId)
+                @Html.DisplayNameFor(model => model.ArtistName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtistId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlbumName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArtistName)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

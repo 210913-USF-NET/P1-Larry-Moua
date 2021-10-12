@@ -374,12 +374,13 @@ namespace DL
         //----------ORDER METHODS----------
         public Order AddOrder(Order ord, int input1, int input2, int input3)
         {
+            DateTime now = DateTime.Now;
             Order orderToAdd = new Order()
             {
                 CustomerId = input1,
                 WarehouseId = input2,
                 PhotocardId = input3,
-                DateandTime = default(DateTime)
+                DateandTime = now
             };
 
             orderToAdd = _context.Add(orderToAdd).Entity;
@@ -392,7 +393,7 @@ namespace DL
                 CustomerId = orderToAdd.CustomerId,
                 WarehouseId = orderToAdd.WarehouseId,
                 PhotocardId = orderToAdd.PhotocardId,
-                DateandTime = default(DateTime)
+                DateandTime = orderToAdd.DateandTime
             };
         }
         public List<Order> GetAllOrders()

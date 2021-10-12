@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using RBBL;
 using Models;
 using WebUI.Models;
+using System.Dynamic;
 
 namespace WebUI.Controllers
 {
@@ -20,15 +21,14 @@ namespace WebUI.Controllers
         // GET: AlbumController
         public ActionResult Index()
         {
+            List<Artist> allArtist = _bl.GetAllArtist();
             List<Album> allAlbum = _bl.GetAllAlbum();
-            return View(allAlbum);
+            var viewmodelResult = from p in allArtist
+                                  join k in allAlbum on p.Id equals k.ArtistId
+                                  select new AlbumVM { AlbumName = k.AlbumName, ArtistName = p.GroupName };
+            return View(viewmodelResult);
         }
 
-        // GET: AlbumController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: AlbumController/Create
         public ActionResult Create()
